@@ -1,0 +1,28 @@
+<div class="container text-center mt-1">
+    <h1>{{title}}</h1>
+  </div>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="search-Products ">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText"  placeholder="&#61442;  Start searching for Products">
+        <button [routerLink]="['/checkout']" type="button" class="btn btn-primary">Checkout</button> 
+    </div>
+      <table class="table table-striped mt-5">
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>Product Names</th>
+          <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let Pro of products | filter:searchText">
+          <td>{{Pro.id}}</td>
+          <td>{{Pro.productname}}</td>
+          <td>{{Pro.Price}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
