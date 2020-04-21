@@ -1,0 +1,68 @@
+<p>products1 works!</p>
+<h3>Create Product</h3>
+<form #productForm="ngForm" (submit)="addProduct(productForm)">
+Name : <input type = "text" [(ngModel)]="productName" name = "productName"> <br/>  <br/>
+Price : <input type = "text" [(ngModel)]="productPrice" name = "productPrice"> <br/> <br/>
+<button type="submit">Submit</button>
+</form>
+
+<h3>Product List</h3>
+<input type="text" name="searchProductName" [(ngModel)]="searchProductName" (change)="filterProductList()" placeholder="Search Name"/>
+<table>
+    <thead>
+        <tr>
+            <th>S.N.O</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of filterList">
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td><button (click)="selectedProduct(product.id)">Add</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Selected List</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of selectedList">
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="product-cart" *ngIf="selectedList && selectedList.length > 0">
+    <ul>
+      <li *ngFor="let product of selectedList">
+        <img class="card-img-top" src="{{item.image}}" alt="Card image cap">
+        {{item.name}} 
+        <span>{{item.price  | currency:'INR'}}</span>
+        <button type="button" class="close" aria-label="Remove Item" (click)="removeItemFromCart(item.id)">
+          <span aria-hidden="true">&times;</span>
+        </button>        
+      </li>
+    </ul>
+    <div class="cart-total">
+      <p><button type="button" class="btn btn-outline-primary btn-sm" (click)="emptyCart()">Empty Cart</button></p>
+      <p class="text-right">
+        <strong class="d-block">Total:</strong>
+        <span class="d-block">{{totalAmmount | currency:'INR'}}</span>
+      </p>
+    </div>
+  </div>
+
+<button (click)= "completed()">Completed</button>
